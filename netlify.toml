@@ -1,0 +1,46 @@
+[build]
+  base = "/"
+  publish = "public/"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/groceries/update/*"
+  to = "/.netlify/functions/destroy"
+
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/groceries/store"
+  to = "/.netlify/functions/store"
+
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/groceries/destroy/*"
+  to = "/.netlify/functions/destroy"
+
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/groceries"
+  to = "/.netlify/functions/get-all"
+
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/groceries/*"
+  to = "/.netlify/functions/get-by-id"
+
+  status = 200
+  force = true
+
+[dev]
+  port = 8888
+  base = "/"
+  publish = "public/"
