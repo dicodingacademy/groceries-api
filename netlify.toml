@@ -7,7 +7,7 @@
 
 [[redirects]]
   from = "/groceries/update/*"
-  to = "/.netlify/functions/destroy"
+  to = "/.netlify/functions/update"
 
   status = 200
   force = true

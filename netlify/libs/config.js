@@ -6,6 +6,7 @@ module.exports = {
       groceries: process.env.SUPABASE_TABLE_GROCERIES,
     },
   },
+
   functions: {
     headers: {
       'Access-Control-Allow-Origin': '*',

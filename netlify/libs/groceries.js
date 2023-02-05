@@ -24,7 +24,7 @@ const Groceries = {
       throw new Error(error.message);
     }
 
-    return data;
+    return data[0] ?? null;
   },
 
   async store({ name, quantity }) {
@@ -69,22 +69,3 @@ const Groceries = {
 
 // export default Groceries;
 module.exports = Groceries;
-const mantap = {
-  name: 'Lindy',
-  breed: 'Cymric',
-  color: 'white',
-  kittens: [
-    {
-      name: 'Percy',
-      gender: 'm'
-    },
-    {
-      name: 'Thea',
-      gender: 'f'
-    },
-    {
-      name: 'Annis',
-      gender: 'f'
-    },
-  ],
-};
