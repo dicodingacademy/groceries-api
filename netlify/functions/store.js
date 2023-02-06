@@ -25,7 +25,7 @@ const handler = async (event) => {
   }
 
   const { name, quantity } = JSON.parse(event.body);
-  await storeGroceries({ name, quantity });
+  const grocery = await storeGroceries({ name, quantity });
 
   return {
     statusCode: 201,
@@ -33,6 +33,7 @@ const handler = async (event) => {
     body: JSON.stringify({
       error: false,
       message: 'New grocery added successfully',
+      grocery,
     }),
   };
 };

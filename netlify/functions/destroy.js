@@ -1,10 +1,11 @@
-import { destroy as destroyGroceries } from '../libs/groceries.js';
+import { destroy as destroyGroceries, getById as getByIdGroceries } from '../libs/groceries.js';
 import config from '../libs/config.js';
 
 const handler = async (event) => {
   const { path } = event;
   const pathSliced = path.slice(11);
-  let id = pathSliced.split('/');
+  const pathSlicedSplitted = pathSliced.split('/');
+  let id = pathSlicedSplitted[pathSlicedSplitted.length - 1];
 
   if (!id) {
     return {
@@ -30,9 +31,10 @@ const handler = async (event) => {
     };
   }
 
+  console.log('event.httpMethod', event.httpMethod);
   if (!(event.httpMethod === 'DELETE')) {
     return {
-      statusCode: 200,
+      statusCode: 405,
       headers: config.functions.headers,
       body: JSON.stringify({
         error: true,
@@ -41,7 +43,19 @@ const handler = async (event) => {
     };
   }
 
-  await destroyGroceries(id);
+  const grocery = await getByIdGroceries(id);
+  if (!(grocery instanceof Object)) {
+    return {
+      statusCode: 404,
+      headers: config.functions.headers,
+      body: JSON.stringify({
+        error: true,
+        message: `No data with id ${id}`,
+      }),
+    };
+  }
+
+  const deletedGrocery = await destroyGroceries(id);
 
   return {
     statusCode: 201,
@@ -49,6 +63,7 @@ const handler = async (event) => {
     body: JSON.stringify({
       error: false,
       message: `Grocery with id ${id} deleted successfully`,
+      grocery: deletedGrocery,
     }),
   };
 };

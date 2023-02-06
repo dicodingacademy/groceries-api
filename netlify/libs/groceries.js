@@ -30,32 +30,42 @@ const Groceries = {
   async store({ name, quantity }) {
     const { data, error } = await supabase
       .from(config.supabase.tables.groceries)
-      .insert({ name, quantity });
-
-    console.log('store', data);
+      .insert({ name, quantity })
+      .select('*');
 
     if (error) {
       throw new Error(error.message);
     }
+
+    return data;
   },
 
   async update(id, { name, quantity }) {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from(config.supabase.tables.groceries)
       .update({ name, quantity })
-      .eq('id', id);
+      .eq('id', id)
+      .select('*');
 
     if (error) {
       throw new Error(error.message);
     }
+
+    return data;
   },
 
   async destroy(id) {
-    const { error } = await supabase.from(config.supabase.tables.groceries).delete().eq('id', id);
+    const { data, error } = await supabase
+      .from(config.supabase.tables.groceries)
+      .delete()
+      .eq('id', id)
+      .select('*');
 
     if (error) {
       throw new Error(error.message);
     }
+
+    return data;
   },
 
   async destroyAll() {

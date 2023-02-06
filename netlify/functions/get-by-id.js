@@ -45,7 +45,7 @@ const handler = async (event) => {
 
   if (!(grocery instanceof Object)) {
     return {
-      statusCode: 400,
+      statusCode: 404,
       headers: config.functions.headers,
       body: JSON.stringify({
         error: true,
