@@ -1,5 +1,5 @@
 const Config = {
-  BASE_URL: 'http://localhost:8888',
+  BASE_URL: 'https://groceries-api.netlify.app',
 };
 
 export default Config;
