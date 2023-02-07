@@ -2,6 +2,13 @@ import { store as storeGroceries } from '../libs/groceries.js';
 import config from '../libs/config.js';
 
 const handler = async (event) => {
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: config.functions.headers,
+    };
+  }
+
   if (!(event.httpMethod === 'POST')) {
     return {
       statusCode: 405,

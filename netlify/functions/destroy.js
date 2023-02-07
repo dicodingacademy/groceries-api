@@ -2,6 +2,13 @@ import { destroy as destroyGroceries, getById as getByIdGroceries } from '../lib
 import config from '../libs/config.js';
 
 const handler = async (event) => {
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: config.functions.headers,
+    };
+  }
+
   const { path } = event;
   const pathSliced = path.slice(11);
   const pathSlicedSplitted = pathSliced.split('/');

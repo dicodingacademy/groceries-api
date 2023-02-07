@@ -33,6 +33,13 @@ const handler = async (event) => {
     };
   }
 
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: config.functions.headers,
+    };
+  }
+
   if (!(event.httpMethod === 'PUT') || !(event.httpMethod === 'PATCH')) {
     return {
       statusCode: 405,

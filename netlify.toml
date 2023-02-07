@@ -2,6 +2,9 @@
   base = "/"
   publish = "public/"
 
+[functions."internal-reset-data"]
+  schedule = "@hourly"
+
 [functions]
   node_bundler = "esbuild"
 
